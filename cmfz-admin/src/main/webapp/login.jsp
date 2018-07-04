@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="css/common.css" type="text/css"></link>
 	<link rel="stylesheet" href="css/login.css" type="text/css"></link>
 	<script type="text/javascript" src="script/jquery.js"></script>
+	<script type="text/javascript" src="script/jquery.cookie.js"></script>
 	<script type="text/javascript" src="script/common.js"></script>
 	<script type="text/javascript">
 		$(function(){
@@ -71,13 +72,39 @@
             });
 			//  form 表单提交
 			$("#loginForm").bind("submit",function(){
-                if (f[0]&&f[1]&&f[2]){
+                remeber();
+			    if (f[0]&&f[1]&&f[2]){
                      return true;
 				}else {
                     return false;
                 }
 			});
+			$(function () {
+				var username=$.cookie('username');
+                var password=$.cookie('password');
+                $("#txtusername").val(username);
+                $("#txtpassword").val(password);
+                if (username != null && username != "" && password !=null && password !=""){
+                    $("#isRememberUsername").attr('checked',true);
+                    f[0]=true;f[1]=true;
+                    $("#usernameinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/></span>");
+                    $("#passwordinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/></span>");
+                }
+            });
 		});
+		function remeber() {
+			var username=$("#txtusername").val();
+			var password=$("#txtpassword").val();
+			//判断复选框的选项是否已经添加
+			if($("#isRememberUsername").is(":checked")){
+			    //存储一个期限的cookie
+				$.cookie("username",username,{expires:7});
+                $.cookie("password",password,{expires:7});
+			}else {
+                $.cookie("username","",{expires: -1});
+                $.cookie("password","",{expires: -1});
+			}
+        }
 	</script>
 </head>
 <body>
@@ -127,7 +154,7 @@
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" id="isRememberUsername" value="true"/> 记住用户名
+								<input type="checkbox" id="isRememberUsername" value="true"/> 记住用户名和密码
 							</label>
 						</td>
 					</tr>

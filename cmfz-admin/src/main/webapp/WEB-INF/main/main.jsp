@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>登录成功! 欢迎${sessionScope.manager.mgrname}</h1>
+    <h1>登录成功! 欢迎${sessionScope.manager.mgrname} 你的权限等级是${sessionScope.manager.mgrstatus}</h1>
+    <input type="button" value="注销" onclick="location='${pageContext.request.contextPath}/manager/logout'">
 </body>
 </html>
