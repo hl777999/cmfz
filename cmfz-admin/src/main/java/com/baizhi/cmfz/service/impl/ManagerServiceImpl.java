@@ -39,4 +39,11 @@ public class ManagerServiceImpl implements ManagerService {
         }
         return false;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Manager queryById(String id) {
+        Manager manager = managerDao.selectById(id);
+        return manager;
+    }
 }
