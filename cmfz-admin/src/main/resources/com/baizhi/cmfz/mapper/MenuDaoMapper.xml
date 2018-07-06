@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.MenuDao">
+     <resultMap id="selectMenuByLevelAllMap" type="Menu">
+         <id property="menuid" column="menu_id"/>
+         <result property="menuname" column="menu_name"/>
+         <result property="menucode" column="menu_code"/>
+         <result property="menuicon" column="menu_icon"/>
+         <result property="menuurl" column="menu_url"/>
+         <result property="menulevel" column="menu_level"/>
+         <result property="menuparentid" column="menu_parent_id"/>
+     </resultMap>
+     <select id="selectMenuByLevelAll" resultMap="selectMenuByLevelAllMap">
+         select * from menu where menu_level=#{id}
+     </select>
+
+    <resultMap id="selectMenuByLevelAndParentidAllMap" type="Menu">
+        <id property="menuid" column="menu_id"/>
+        <result property="menuname" column="menu_name"/>
+        <result property="menucode" column="menu_code"/>
+        <result property="menuicon" column="menu_icon"/>
+        <result property="menuurl" column="menu_url"/>
+        <result property="menulevel" column="menu_level"/>
+        <result property="menuparentid" column="menu_parent_id"/>
+    </resultMap>
+    <select id="selectMenuByLevelAndParentidAll" resultMap="selectMenuByLevelAndParentidAllMap">
+        select * from menu where menu_level=#{levelid} and menu_parent_id=#{parentid}
+    </select>
+
+    <resultMap id="selectALLMap" type="Menu">
+        <id property="menuid" column="m1_menu_id"/>
+        <result property="menuname" column="m1_menu_name"/>
+        <result property="menucode" column="m1_menu_code"/>
+        <result property="menuicon" column="m1_menu_icon"/>
+        <result property="menulevel" column="m1_menu_level"/>
+        <collection property="menus" ofType="Menu">
+            <id property="menuid" column="m2_menu_id"/>
+            <result property="menuname" column="m2_menu_name"/>
+            <result property="menucode" column="m2_menu_code"/>
+            <result property="menuicon" column="m2_menu_icon"/>
+            <result property="menuurl" column="m2_menu_url"/>
+            <result property="menulevel" column="m2_menu_level"/>
+            <result property="menuparentid" column="m2_menu_parent_id"/>
+        </collection>
+    </resultMap>
+    <select id="selectALL" resultMap="selectALLMap">
+        SELECT
+        m1.menu_id m1_menu_id,
+        m1.menu_name m1_menu_name,
+        m1.menu_code m1_menu_code,
+        m1.menu_icon m1_menu_icon,
+        m1.menu_level m1_menu_level,
+        m2.menu_id m2_menu_id,
+        m2.menu_name m2_menu_name,
+        m2.menu_code m2_menu_code,
+        m2.menu_icon m2_menu_icon,
+        m2.menu_level m2_menu_level,
+        m2.menu_url m2_menu_url,
+        m2.menu_parent_id m2_menu_parent_id
+        FROM
+        menu m1 LEFT OUTER JOIN menu m2 ON m1.menu_id = m2.menu_parent_id
+        WHERE
+        m1.menu_level = #{id}
+    </select>
+</mapper>

@@ -1,5 +1,7 @@
 package com.baizhi.cmfz.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,71 +10,72 @@ import java.util.Date;
  * Created by huanglei on 2018/7/3.
  */
 public class Picture implements Serializable {
-    private String picture_id;
-    private String picture_path;
-    private Date picture_date;
-    private String picture_description;
-    private String picture_status;
+    private String pictureid;
+    private String picturepath;
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Date picturedate;
+    private String picturedescription;
+    private String picturestatus;
 
     public Picture() {
     }
 
-    public Picture(String picture_id, String picture_path, Date picture_date, String picture_description, String picture_status) {
-        this.picture_id = picture_id;
-        this.picture_path = picture_path;
-        this.picture_date = picture_date;
-        this.picture_description = picture_description;
-        this.picture_status = picture_status;
+    public Picture(String pictureid, String picturepath, Date picturedate, String picturedescription, String picturestatus) {
+        this.pictureid = pictureid;
+        this.picturepath = picturepath;
+        this.picturedate = picturedate;
+        this.picturedescription = picturedescription;
+        this.picturestatus = picturestatus;
     }
 
-    public String getPicture_id() {
-        return picture_id;
+    public String getPictureid() {
+        return pictureid;
     }
 
-    public void setPicture_id(String picture_id) {
-        this.picture_id = picture_id;
+    public void setPictureid(String pictureid) {
+        this.pictureid = pictureid;
     }
 
-    public String getPicture_path() {
-        return picture_path;
+    public String getPicturepath() {
+        return picturepath;
     }
 
-    public void setPicture_path(String picture_path) {
-        this.picture_path = picture_path;
+    public void setPicturepath(String picturepath) {
+        this.picturepath = picturepath;
     }
 
-    public Date getPicture_date() {
-        return picture_date;
+    public Date getPicturedate() {
+        return picturedate;
     }
 
-    public void setPicture_date(Date picture_date) {
-        this.picture_date = picture_date;
+    public void setPicturedate(Date picturedate) {
+        this.picturedate = picturedate;
     }
 
-    public String getPicture_description() {
-        return picture_description;
+    public String getPicturedescription() {
+        return picturedescription;
     }
 
-    public void setPicture_description(String picture_description) {
-        this.picture_description = picture_description;
+    public void setPicturedescription(String picturedescription) {
+        this.picturedescription = picturedescription;
     }
 
-    public String getPicture_status() {
-        return picture_status;
+    public String getPicturestatus() {
+        return picturestatus;
     }
 
-    public void setPicture_status(String picture_status) {
-        this.picture_status = picture_status;
+    public void setPicturestatus(String picturestatus) {
+        this.picturestatus = picturestatus;
     }
 
     @Override
     public String toString() {
         return "Picture{" +
-                "picture_id='" + picture_id + '\'' +
-                ", picture_path='" + picture_path + '\'' +
-                ", picture_date=" + picture_date +
-                ", picture_description='" + picture_description + '\'' +
-                ", picture_status='" + picture_status + '\'' +
+                "pictureid='" + pictureid + '\'' +
+                ", picturepath='" + picturepath + '\'' +
+                ", picturedate=" + picturedate +
+                ", picturedescription='" + picturedescription + '\'' +
+                ", picturestatus='" + picturestatus + '\'' +
                 '}';
     }
 }

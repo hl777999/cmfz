@@ -7,11 +7,11 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
 	<link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-	<link rel="stylesheet" href="css/common.css" type="text/css"></link>
-	<link rel="stylesheet" href="css/login.css" type="text/css"></link>
-	<script type="text/javascript" src="script/jquery.js"></script>
-	<script type="text/javascript" src="script/jquery.cookie.js"></script>
-	<script type="text/javascript" src="script/common.js"></script>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css"></link>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css"></link>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/script/jquery.cookie.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/script/common.js"></script>
 	<script type="text/javascript">
 		$(function(){
 		    var f=[false,false,false];
@@ -22,7 +22,7 @@
 			$("#txtusername").change(function(){
 			    var id=$(this).val();
 			    if (id.length==0){
-                    $("#usernameinfo").html("<span style='color:red;font-size: 3px'><img src='../img/wrong.gif'/>&nbsp;不能为空</span>");
+                    $("#usernameinfo").html("<span style='color:red;font-size: 3px'><img src='${pageContext.request.contextPath}/img/wrong.gif'/>&nbsp;不能为空</span>");
 				}else {
 			        $.ajax({
 						type:"post",
@@ -31,10 +31,10 @@
 						dataType:"json",
 						success:function(data){
                            if(data){
-                               $("#usernameinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/>&nbsp;用户存在</span>");
+                               $("#usernameinfo").html("<span style='color:green;font-size: 5px'><img src='${pageContext.request.contextPath}/img/right.gif'/>&nbsp;用户存在</span>");
 							   f[0]=true;
 						   }else{
-                               $("#usernameinfo").html("<span style='color:red;font-size: 5px'><img src='../img/wrong.gif'/>&nbsp;用户不存在</span>");
+                               $("#usernameinfo").html("<span style='color:red;font-size: 5px'><img src='${pageContext.request.contextPath}/img/wrong.gif'/>&nbsp;用户不存在</span>");
                            }
 						}
 					});
@@ -43,16 +43,16 @@
 			$("#txtpassword").change(function(){
 				var pwd=$(this).val();
 				if (pwd.length == 0){
-                    $("#passwordinfo").html("<span style='color:red;font-size: 5px'><img src='../img/wrong.gif'/>&nbsp;密码不能为空</span>");
+                    $("#passwordinfo").html("<span style='color:red;font-size: 5px'><img src='${pageContext.request.contextPath}/img/wrong.gif'/>&nbsp;密码不能为空</span>");
                 }else{
-                    $("#passwordinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/></span>");
+                    $("#passwordinfo").html("<span style='color:green;font-size: 5px'><img src='${pageContext.request.contextPath}/img/right.gif'/></span>");
 					f[1]=true;
 				}
             });
 			$("#enCode").change(function(){
 				var code=$(this).val();
 				if (code == 0){
-                    $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='../img/wrong.gif'/>&nbsp;验证码为空</span>");
+                    $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='${pageContext.request.contextPath}/img/wrong.gif'/>&nbsp;验证码为空</span>");
                 }else{
                     $.ajax({
 						type:"post",
@@ -61,10 +61,10 @@
 						dataType:"json",
 						success:function(data){
 							if(data){
-                                $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='../img/right.gif'/></span>");
+                                $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='${pageContext.request.contextPath}/img/right.gif'/></span>");
                                 f[2]=true;
 							}else{
-                                $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='../img/wrong.gif'/></span>");
+                                $("#codeinfo").html("<span style='color:red;font-size: 5px'><img src='${pageContext.request.contextPath}/img/wrong.gif'/></span>");
                             }
                         }
 					});
@@ -73,6 +73,7 @@
 			//  form 表单提交
 			$("#loginForm").bind("submit",function(){
                 remeber();
+//                f[2]=true;
 			    if (f[0]&&f[1]&&f[2]){
                      return true;
 				}else {
@@ -87,8 +88,8 @@
                 if (username != null && username != "" && password !=null && password !=""){
                     $("#isRememberUsername").attr('checked',true);
                     f[0]=true;f[1]=true;
-                    $("#usernameinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/></span>");
-                    $("#passwordinfo").html("<span style='color:green;font-size: 5px'><img src='../img/right.gif'/></span>");
+                    $("#usernameinfo").html("<span style='color:green;font-size: 5px'><img src='${pageContext.request.contextPath}/img/right.gif'/></span>");
+                    $("#passwordinfo").html("<span style='color:green;font-size: 5px'><img src='${pageContext.request.contextPath}/img/right.gif'/></span>");
                 }
             });
 		});

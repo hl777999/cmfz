@@ -1,66 +1,91 @@
 package com.baizhi.cmfz.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Description 上师实体类
  * Created by huanglei on 2018/7/3.
  */
 public class Guru implements Serializable {
-    private String guru_id;
-    private String guru_name;
-    private String guru_pic;
-    private String guru_summary;
-
+    private String guruid;
+    private String guruname;
+    private String gurupic;
+    private String gurusummary;
+    private String gurustatus;
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Date createtime;
     public Guru() {
     }
 
-    public Guru(String guru_id, String guru_name, String guru_pic, String guru_summary) {
-        this.guru_id = guru_id;
-        this.guru_name = guru_name;
-        this.guru_pic = guru_pic;
-        this.guru_summary = guru_summary;
+    public Guru(String guruid, String guruname, String gurupic, String gurusummary, String gurustatus, Date createtime) {
+        this.guruid = guruid;
+        this.guruname = guruname;
+        this.gurupic = gurupic;
+        this.gurusummary = gurusummary;
+        this.gurustatus = gurustatus;
+        this.createtime = createtime;
     }
 
-    public String getGuru_id() {
-        return guru_id;
+    public String getGuruid() {
+        return guruid;
     }
 
-    public void setGuru_id(String guru_id) {
-        this.guru_id = guru_id;
+    public void setGuruid(String guruid) {
+        this.guruid = guruid;
     }
 
-    public String getGuru_name() {
-        return guru_name;
+    public String getGuruname() {
+        return guruname;
     }
 
-    public void setGuru_name(String guru_name) {
-        this.guru_name = guru_name;
+    public void setGuruname(String guruname) {
+        this.guruname = guruname;
     }
 
-    public String getGuru_pic() {
-        return guru_pic;
+    public String getGurupic() {
+        return gurupic;
     }
 
-    public void setGuru_pic(String guru_pic) {
-        this.guru_pic = guru_pic;
+    public void setGurupic(String gurupic) {
+        this.gurupic = gurupic;
     }
 
-    public String getGuru_summary() {
-        return guru_summary;
+    public String getGurusummary() {
+        return gurusummary;
     }
 
-    public void setGuru_summary(String guru_summary) {
-        this.guru_summary = guru_summary;
+    public void setGurusummary(String gurusummary) {
+        this.gurusummary = gurusummary;
+    }
+
+    public String getGurustatus() {
+        return gurustatus;
+    }
+
+    public void setGurustatus(String gurustatus) {
+        this.gurustatus = gurustatus;
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
     }
 
     @Override
     public String toString() {
         return "Guru{" +
-                "guru_id='" + guru_id + '\'' +
-                ", guru_name='" + guru_name + '\'' +
-                ", guru_pic='" + guru_pic + '\'' +
-                ", guru_summary='" + guru_summary + '\'' +
+                "guruid='" + guruid + '\'' +
+                ", guruname='" + guruname + '\'' +
+                ", gurupic='" + gurupic + '\'' +
+                ", gurusummary='" + gurusummary + '\'' +
+                ", gurustatus='" + gurustatus + '\'' +
+                ", createtime=" + createtime +
                 '}';
     }
 }
