@@ -37,4 +37,8 @@
           <property name="prefix" value="/"/>
           <property name="suffix" value=".jsp"/>
       </bean>
+
+    <!--&lt;!&ndash; 扫描poi提供的类 &ndash;&gt;-->
+    <context:component-scan base-package="org.jeecgframework.poi.excel.view"/>
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="beanNameViewResolver"/>
 </beans>

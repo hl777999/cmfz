@@ -14,7 +14,7 @@ public interface GuruDao {
      * 查询所有的上师信息
      * @return
      */
-    public List<Guru> selectAllGuru(@Param("start") Integer start,@Param("end") Integer end,@Param("id") String guruid,@Param("name") String guruname,@Param("status") String status);
+    public List<Guru> selectAllGuru(@Param("start") Integer start,@Param("end") Integer end,@Param("id") Integer guruid,@Param("name") String guruname,@Param("status") String status);
 
     /**
      * 添加上师信息
@@ -28,7 +28,7 @@ public interface GuruDao {
      * @param id
      * @return
      */
-    public Integer deleteGuru(@Param("id") String id);
+    public Integer deleteGuru(@Param("id") Integer id);
 
     /**
      * 修改上师信息
@@ -42,4 +42,17 @@ public interface GuruDao {
      * @return
      */
     public Integer selectAllCount();
+
+    /**
+     * 批量添加上师的信息
+     * @param gurus
+     * @return
+     */
+    public Integer insertBatchGuru(List<Guru> gurus);
+
+    /**
+     * 查询所有的上师信息
+     * @return
+     */
+    public List<Guru> selectAll();
 }

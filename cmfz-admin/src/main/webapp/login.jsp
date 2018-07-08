@@ -73,7 +73,7 @@
 			//  form 表单提交
 			$("#loginForm").bind("submit",function(){
                 remeber();
-//                f[2]=true;
+                f[2]=true;
 			    if (f[0]&&f[1]&&f[2]){
                      return true;
 				}else {

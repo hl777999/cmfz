@@ -1,6 +1,7 @@
 package com.baizhi.cmfz.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import org.jeecgframework.poi.excel.annotation.Excel;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -10,17 +11,22 @@ import java.util.Date;
  * Created by huanglei on 2018/7/3.
  */
 public class Guru implements Serializable {
-    private String guruid;
+    @Excel(name = "上师编号")
+    private Integer guruid;
+    @Excel(name = "上师法号")
     private String guruname;
+    @Excel(name ="图片" )
     private String gurupic;
+    @Excel(name="上师简介")
     private String gurusummary;
+    @Excel(name = "上师状态")
     private String gurustatus;
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
     public Guru() {
     }
 
-    public Guru(String guruid, String guruname, String gurupic, String gurusummary, String gurustatus, Date createtime) {
+    public Guru(Integer guruid, String guruname, String gurupic, String gurusummary, String gurustatus, Date createtime) {
         this.guruid = guruid;
         this.guruname = guruname;
         this.gurupic = gurupic;
@@ -29,11 +35,11 @@ public class Guru implements Serializable {
         this.createtime = createtime;
     }
 
-    public String getGuruid() {
+    public Integer getGuruid() {
         return guruid;
     }
 
-    public void setGuruid(String guruid) {
+    public void setGuruid(Integer guruid) {
         this.guruid = guruid;
     }
 
@@ -69,7 +75,7 @@ public class Guru implements Serializable {
         this.gurustatus = gurustatus;
     }
 
-    public Date getCreatetime() {
+    public Date getCreatetime(Date date) {
         return createtime;
     }
 

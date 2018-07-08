@@ -31,4 +31,40 @@
         select count(*) from guru
     </select>
 
+    <insert id="insertGuru" parameterType="Guru">
+        insert into
+        guru
+        VALUES(DEFAULT,#{guruname},#{gurupic},#{gurusummary},#{gurustatus},#{createtime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <update id="updateGuru" parameterType="Guru">
+        update guru
+        set guru_name=#{guruname},guru_summary=#{gurusummary},guru_status=#{gurustatus},create_time=#{createtime,jdbcType=TIMESTAMP}
+        where guru_id=#{guruid}
+    </update>
+
+    <delete id="deleteGuru">
+        delete from guru where guru_id=#{id}
+    </delete>
+
+    <insert id="insertBatchGuru" parameterType="java.util.List">
+         insert into guru(guru_id,guru_name,guru_pic,guru_summary,guru_status,create_time)
+         values
+        <foreach collection="list" item="item" separator=",">
+            (DEFAULT,#{item.guruname},#{item.gurupic},#{item.gurusummary},#{item.gurustatus},#{item.createtime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+
+    <resultMap id="selectAllMap" type="Guru">
+        <id property="guruid" column="guru_id"/>
+        <result property="guruname" column="guru_name"/>
+        <result property="gurupic" column="guru_pic"/>
+        <result property="gurusummary" column="guru_summary"/>
+        <result property="gurustatus" column="guru_status"/>
+        <result property="createtime" column="create_time"/>
+    </resultMap>
+    <select id="selectAll" resultMap="selectAllMap">
+        select * from guru
+    </select>
 </mapper>

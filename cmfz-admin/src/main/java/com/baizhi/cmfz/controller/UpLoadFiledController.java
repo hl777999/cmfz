@@ -36,7 +36,6 @@ public class UpLoadFiledController {
         String originalFilename = myfiled.getOriginalFilename();
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
         myfiled.transferTo(new File(path1+"\\upload"+"/"+originalFilename));
-//        System.out.println(name+"\t"+dept+"\t"+originalFilename);
         boolean b = pictureService.addPic(new Picture(uuid, originalFilename, null, name, dept));
         if (b){
             return true;

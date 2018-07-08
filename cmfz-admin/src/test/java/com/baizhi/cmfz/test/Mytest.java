@@ -8,6 +8,7 @@ import com.baizhi.cmfz.entity.Guru;
 import com.baizhi.cmfz.entity.Manager;
 import com.baizhi.cmfz.entity.Menu;
 import com.baizhi.cmfz.entity.Picture;
+import com.baizhi.cmfz.service.GuruService;
 import com.baizhi.cmfz.service.ManagerService;
 import com.baizhi.cmfz.service.MenuService;
 import com.baizhi.cmfz.service.PictureService;
@@ -18,6 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -156,5 +158,39 @@ public class Mytest {
         for (Guru guru : gurus) {
             System.out.println(guru);
         }
+    }
+
+    @Test
+    public void  test14(){
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        GuruDao guruDao= (GuruDao) ctx.getBean("guruDao");
+//        Integer integer = guruDao.insertGuru(new Guru(null, "仁波切13", "2.jpg", "得到大法师", "健在", new Date()));
+//        System.out.println(integer);
+        List<Guru> list = guruDao.selectAll();
+        for (Guru guru : list) {
+            System.out.println(guru);
+        }
+    }
+
+    @Test
+    public void  test15(){
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+         GuruService guruService= (GuruService) ctx.getBean("guruServiceImpl");
+        boolean b = guruService.modifyGuru(new Guru(15, "上师仁波切15", "2.jpg", "上乘大法师", "健在", null));
+        if (b) {
+            System.out.println("修改成功!");
+        }
+    }
+
+    @Test
+    public void  test16(){
+        ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        GuruDao guruDao= (GuruDao) ctx.getBean("guruDao");
+        List<Guru> list=new ArrayList<>();
+        list.add(new Guru(null,"12","123","123","123",new Date()));
+        list.add(new Guru(null,"12","123","123","123",new Date()));
+        list.add(new Guru(null,"12","123","123","123",new Date()));
+        Integer integer = guruDao.insertBatchGuru(list);
+        System.out.println(integer);
     }
 }

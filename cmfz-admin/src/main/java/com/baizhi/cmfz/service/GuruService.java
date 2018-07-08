@@ -3,6 +3,7 @@ package com.baizhi.cmfz.service;
 import com.baizhi.cmfz.entity.Guru;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +21,7 @@ public interface GuruService {
      * @param status
      * @return
      */
-    public Map<String,Object> queryAllGuru(Integer newPage,Integer pageSize,String guruid,String guruname,String status);
+    public Map<String,Object> queryAllGuru(Integer newPage,Integer pageSize,Integer guruid,String guruname,String status);
 
     /**
      * 插入上师信息
@@ -41,5 +42,18 @@ public interface GuruService {
      * @param id
      * @return
      */
-    public  boolean removeGuru(String id);
+    public  boolean removeGuru(Integer id);
+
+    /**
+     * 批量添加上师信息
+     * @param gurus
+     * @return
+     */
+    public  boolean batchAddGuru(List<Guru> gurus);
+
+    /**
+     * 查询所有上师信息
+     * @return
+     */
+    public  List<Guru> queryAll();
 }
