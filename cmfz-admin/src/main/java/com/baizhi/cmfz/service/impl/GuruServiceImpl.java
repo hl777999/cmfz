@@ -26,7 +26,7 @@ public class GuruServiceImpl implements GuruService {
     public Map<String, Object> queryAllGuru(Integer newPage, Integer pageSize, Integer guruid, String guruname, String status) {
         Map<String,Object> map=new HashMap<>();
         List<Guru> gurus = guruDao.selectAllGuru((newPage - 1) * pageSize, pageSize, guruid, guruname, status);
-        Integer count = guruDao.selectAllCount();
+        Integer count = guruDao.selectAllCount(guruid, guruname,status);
         map.put("total",count);
         map.put("rows",gurus);
         return map;

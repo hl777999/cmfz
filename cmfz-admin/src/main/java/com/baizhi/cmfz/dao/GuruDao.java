@@ -41,7 +41,7 @@ public interface GuruDao {
      * 查询上师信息的总数
      * @return
      */
-    public Integer selectAllCount();
+    public Integer selectAllCount(@Param("id") Integer guruid,@Param("name") String guruname,@Param("status") String status);
 
     /**
      * 批量添加上师的信息

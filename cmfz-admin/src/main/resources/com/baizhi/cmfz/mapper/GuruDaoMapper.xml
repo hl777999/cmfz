@@ -28,7 +28,19 @@
     </select>
 
     <select id="selectAllCount" resultType="Integer">
-        select count(*) from guru
+        select count(*)
+        from guru
+        <where>
+            <if test="id !=null">
+                guru_id=#{id}
+            </if>
+            <if test="name !=null">
+                guru_name=#{name}
+            </if>
+            <if test="status !=null">
+                guru_status=#{status}
+            </if>
+        </where>
     </select>
 
     <insert id="insertGuru" parameterType="Guru">
@@ -64,6 +76,7 @@
         <result property="gurustatus" column="guru_status"/>
         <result property="createtime" column="create_time"/>
     </resultMap>
+
     <select id="selectAll" resultMap="selectAllMap">
         select * from guru
     </select>

@@ -8,30 +8,30 @@ import java.util.Date;
  * Created by huanglei on 2018/7/3.
  */
 public class Article implements Serializable {
-    private String articleid;
+    private Integer articleid;
     private String articlename;
-    private String guruid;
+    private Integer guruid;
     private String articleintroduction;
     private Date datetime;
-    private String articlepic;
+    private String articlestatus;
 
     public Article() {
     }
 
-    public Article(String articleid, String articlename, String guruid, String articleintroduction, Date datetime, String articlepic) {
+    public Article(Integer articleid, String articlename, Integer guruid, String articleintroduction, Date datetime, String articlestatus) {
         this.articleid = articleid;
         this.articlename = articlename;
         this.guruid = guruid;
         this.articleintroduction = articleintroduction;
         this.datetime = datetime;
-        this.articlepic = articlepic;
+        this.articlestatus = articlestatus;
     }
 
-    public String getArticleid() {
+    public Integer getArticleid() {
         return articleid;
     }
 
-    public void setArticleid(String articleid) {
+    public void setArticleid(Integer articleid) {
         this.articleid = articleid;
     }
 
@@ -43,11 +43,11 @@ public class Article implements Serializable {
         this.articlename = articlename;
     }
 
-    public String getGuruid() {
+    public Integer getGuruid() {
         return guruid;
     }
 
-    public void setGuruid(String guruid) {
+    public void setGuruid(Integer guruid) {
         this.guruid = guruid;
     }
 
@@ -67,23 +67,23 @@ public class Article implements Serializable {
         this.datetime = datetime;
     }
 
-    public String getArticlepic() {
-        return articlepic;
+    public String getArticlestatus() {
+        return articlestatus;
     }
 
-    public void setArticlepic(String articlepic) {
-        this.articlepic = articlepic;
+    public void setArticlestatus(String articlestatus) {
+        this.articlestatus = articlestatus;
     }
 
     @Override
     public String toString() {
         return "Article{" +
-                "articleid='" + articleid + '\'' +
+                "articleid=" + articleid +
                 ", articlename='" + articlename + '\'' +
                 ", guruid='" + guruid + '\'' +
                 ", articleintroduction='" + articleintroduction + '\'' +
                 ", datetime=" + datetime +
-                ", articlepic='" + articlepic + '\'' +
+                ", articlestatus='" + articlestatus + '\'' +
                 '}';
     }
 }

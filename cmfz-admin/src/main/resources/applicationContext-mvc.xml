@@ -38,7 +38,13 @@
           <property name="suffix" value=".jsp"/>
       </bean>
 
-    <!--&lt;!&ndash; 扫描poi提供的类 &ndash;&gt;-->
-    <context:component-scan base-package="org.jeecgframework.poi.excel.view"/>
-    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="beanNameViewResolver"/>
+    <!--&lt;!&ndash;&lt;!&ndash; 扫描poi提供的类 &ndash;&gt;&ndash;&gt;-->
+    <!--<context:component-scan base-package="org.jeecgframework.poi.excel.view"/>-->
+    <!--<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" id="beanNameViewResolver" />-->
+
+    <!--&lt;!&ndash; Excel 处理 根据用户输入进行对象处理 &ndash;&gt;-->
+    <!--<bean id="jeecgExcelView" class="org.jeecgframework.poi.excel.view.JeecgSingleExcelView" />-->
+    <!--<bean id="jeecgTemplateExcelView" class="org.jeecgframework.poi.excel.view.JeecgTemplateExcelView" />-->
+    <!--<bean id="jeecgTemplateWordView" class="org.jeecgframework.poi.excel.view.JeecgTemplateWordView" />-->
+    <!--<bean id="jeecgMapExcelView" class="org.jeecgframework.poi.excel.view.JeecgMapExcelView" />-->
 </beans>

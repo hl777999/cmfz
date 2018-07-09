@@ -37,7 +37,6 @@
                     '<td style="border:0">' +
                     '<p>上师法号: ' + rowData.guruname + '</p>' +
                     '<p>上师状态: ' + rowData.gurusummary + '</p>' +
-                    '<a id="modifypic" class="easyui-linkbutton" href="#">上师</a>' +
                     '</td>' +
                     '</tr></table>';
             }
@@ -152,7 +151,7 @@
                     $.messager.alert("警告","请选择一个上师的信息!");
                 }else{
                     $.messager.confirm("确认","您确认想要删除【"+rowData.guruname+"】信息吗？",function(r){
-                        if (r){
+                            if (r){
                             $.ajax({
                                 type:"POST",
                                 url:"${pageContext.request.contextPath}/guru/removeguru",
@@ -242,7 +241,7 @@
     <a id="upload" class="easyui-linkbutton"
        data-options="iconCls:'icon-arrow_up',plain:true,text:'批量添加上师'"></a>
     <a id="download" class="easyui-linkbutton" data-options="iconCls:'icon-page_excel',plain:true,text:'导出上师信息'"
-       href="${pageContext.request.contextPath}/guru/downloadguru"></a>
+       href="${pageContext.request.contextPath}/uploadfiled/downloadguru"></a>
 </div>
 <div id="dd2"></div>
 <div id="dd3"></div>

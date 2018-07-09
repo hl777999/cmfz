@@ -4,14 +4,8 @@ import com.baizhi.cmfz.dao.GuruDao;
 import com.baizhi.cmfz.dao.ManagerDao;
 import com.baizhi.cmfz.dao.MenuDao;
 import com.baizhi.cmfz.dao.PictureDao;
-import com.baizhi.cmfz.entity.Guru;
-import com.baizhi.cmfz.entity.Manager;
-import com.baizhi.cmfz.entity.Menu;
-import com.baizhi.cmfz.entity.Picture;
-import com.baizhi.cmfz.service.GuruService;
-import com.baizhi.cmfz.service.ManagerService;
-import com.baizhi.cmfz.service.MenuService;
-import com.baizhi.cmfz.service.PictureService;
+import com.baizhi.cmfz.entity.*;
+import com.baizhi.cmfz.service.*;
 import com.baizhi.cmfz.util.EncryptionUtils;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -163,11 +157,16 @@ public class Mytest {
     @Test
     public void  test14(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-        GuruDao guruDao= (GuruDao) ctx.getBean("guruDao");
+//        GuruDao guruDao= (GuruDao) ctx.getBean("guruDao");
 //        Integer integer = guruDao.insertGuru(new Guru(null, "仁波切13", "2.jpg", "得到大法师", "健在", new Date()));
 //        System.out.println(integer);
-        List<Guru> list = guruDao.selectAll();
-        for (Guru guru : list) {
+//        List<Guru> list = guruDao.selectAll();
+//        for (Guru guru : list) {
+//            System.out.println(guru);
+//        }
+        GuruService guruService= (GuruService) ctx.getBean("guruServiceImpl");
+        List<Guru> gurus = guruService.queryAll();
+        for (Guru guru : gurus) {
             System.out.println(guru);
         }
     }
@@ -176,9 +175,13 @@ public class Mytest {
     public void  test15(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
          GuruService guruService= (GuruService) ctx.getBean("guruServiceImpl");
-        boolean b = guruService.modifyGuru(new Guru(15, "上师仁波切15", "2.jpg", "上乘大法师", "健在", null));
-        if (b) {
-            System.out.println("修改成功!");
+//        boolean b = guruService.modifyGuru(new Guru(15, "上师仁波切15", "2.jpg", "上乘大法师", "健在", null));
+//        if (b) {
+//            System.out.println("修改成功!");
+//        }
+        Map<String, Object> map = guruService.queryAllGuru(1, 5, null, null, null);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            System.out.println(entry);
         }
     }
 
@@ -192,5 +195,15 @@ public class Mytest {
         list.add(new Guru(null,"12","123","123","123",new Date()));
         Integer integer = guruDao.insertBatchGuru(list);
         System.out.println(integer);
+    }
+
+    @Test
+    public void  test17() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        ArticleService articleService= (ArticleService) ctx.getBean("articleServiceImpl");
+        boolean b = articleService.addArticle(new Article(null, "111", 1, "123", new Date(), "未上架"));
+        if (b) {
+            System.out.println("插入成功");
+        }
     }
 }

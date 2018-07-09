@@ -225,6 +225,7 @@
             <artifactId>easypoi-web</artifactId>
             <version>2.3.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.jeecg</groupId>
             <artifactId>easypoi-annotation</artifactId>
@@ -234,6 +235,22 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>4.2.0.Final</version>
+        </dependency>
+        <!--12-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.1.0</version>
         </dependency>
     </dependencies>
 </project>

@@ -48,6 +48,9 @@
           <element id="library" level="project" name="Maven: org.jeecg:easypoi-web:2.3.1" />
           <element id="library" level="project" name="Maven: org.jeecg:easypoi-annotation:2.3.1" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:4.2.0.Final" />
+          <element id="library" level="project" name="Maven: cn.afterturn:easypoi-base:3.1.0" />
+          <element id="library" level="project" name="Maven: cn.afterturn:easypoi-web:3.1.0" />
+          <element id="library" level="project" name="Maven: cn.afterturn:easypoi-annotation:3.1.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">

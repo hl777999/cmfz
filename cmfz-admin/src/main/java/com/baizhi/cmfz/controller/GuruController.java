@@ -1,5 +1,6 @@
 package com.baizhi.cmfz.controller;
 
+import cn.afterturn.easypoi.excel.entity.enmus.ExcelType;
 import com.baizhi.cmfz.entity.Guru;
 import com.baizhi.cmfz.service.GuruService;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -70,29 +71,14 @@ public class GuruController {
         return guruService.removeGuru(guruid);
     }
 
-    @RequestMapping("/downloadguru")
-    @ResponseBody
-    public String export(ModelMap map){
-        List<Guru> gurus = guruService.queryAll();
-        //告诉poi要转换的类型
-        map.put(NormalExcelConstants.CLASS,Guru.class);
-        //输出Excel表格的名字
-        map.put(NormalExcelConstants.FILE_NAME, "上师信息");
-        //绑定标题刚和sheet名字
-        ExportParams ep = new ExportParams("上师信息", "表一");
-        map.put(NormalExcelConstants.PARAMS, ep);
-        map.put(NormalExcelConstants.DATA_LIST, gurus);
-        return NormalExcelConstants.JEECG_EXCEL_VIEW;
-    }
-
     @RequestMapping("/uploadexcel")
     public @ResponseBody boolean importExcel(MultipartFile myfiled,HttpServletRequest request) throws Exception {
         ImportParams params = new ImportParams();
-//        //表格标题（默认为0） 但是如果设置标题，就设为一
-//        params.setTitleRows(1);
-//        //设置表头
-//        params.setHeadRows(1);
-//        //是否保存上传的Excel
+        //表格标题（默认为0） 但是如果设置标题，就设为一
+        params.setTitleRows(0);
+        //设置表头
+        params.setHeadRows(1);
+        //是否保存上传的Excel
         params.setNeedSave(true);
         String path = request.getSession().getServletContext().getRealPath("");
         File f = new File(path+"/excel"+myfiled.getOriginalFilename());
