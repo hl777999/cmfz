@@ -22,7 +22,7 @@
                     上&nbsp;&nbsp;师&nbsp;&nbsp;法&nbsp;&nbsp;号:
                 </td>
                 <td>
-                    <input class="easyui-textbox" placeholder="请输入描述信息" name="guruname" style="width:200px" required ="required"/>
+                    <input class="easyui-textbox"  name="guruname" style="width:200px" required ="required"/>
                 </td>
             </tr>
             <tr>
@@ -30,7 +30,7 @@
                     上&nbsp;&nbsp;师&nbsp;&nbsp;情&nbsp;&nbsp;况:
                 </td>
                 <td>
-                    <select id="cc" class="easyui-combobox" placeholder="请选择轮播图状态" name="gurustatus" style="width:200px" required ="required">
+                    <select id="cc" class="easyui-combobox"  name="gurustatus" style="width:200px" required ="required">
                         <option value="健在">健在</option>
                         <option value="已故">已故</option>
                     </select>

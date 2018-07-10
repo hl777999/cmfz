@@ -15,14 +15,27 @@
     $(function () {
         $("#btn2").linkbutton({
             onClick: function () {
+                var m1=editor.txt.text();
                 $("#article").val(editor.txt.html());
-                var article = $("#article").val();
-                var m ="";
-                if( article = m){
-                    $.messager.alert("警告","文章内容不能为空！");
-                }else {
+                if (m1==""){
+                    $.messager.show({
+                        title:'警告',
+                        msg:'文章内容不能为空！4秒后自动关闭',
+                        icon:'warning',
+                        modal:true,
+                        style:{
+                            right:'',
+                            top:"50px",
+                            bottom:''
+                        }
+                    });
+                }else{
+//                    $.messager.confirm({
+//
+//                    });
                     $.messager.confirm("确认","您确认保存该文章吗？",function (r) {
                         if (r){
+                            $.messager.progress();
                             $("#form_article").form("submit",{
                                 url:"${pageContext.request.contextPath}/article/addarticle",
                                 onSubmit:function () {
@@ -34,16 +47,17 @@
                                 },
                                 success:function (date) {
                                     if(date){
-                                        $.messager.progress({text:'正在提交'});	// 如果提交成功则隐藏进度条
                                         $.messager.progress('close');
+                                        $("#tt1").tabs('close', '创建文章');    //关闭选项卡
                                     }else{
+                                        $.messager.progress('close');
                                         $.messager.alert("警告","修改失败!");
                                     }
                                 }
                             });
                         }
-                    })
 
+                    }).panel("options").top = $(document).scrollTop() + 50;
                 }
             }
         });
@@ -71,7 +85,7 @@
             <tr>
                 <td>文章作者:</td>
                 <td>
-                    <select id="cc1"  name="guruid"  value="请选择上师" style="width:200px;">
+                    <select id="cc1"  name="guruid"  value="请选择上师" style="width:200px;" data-options="required:true">
                     </select>
                 </td>
             </tr>

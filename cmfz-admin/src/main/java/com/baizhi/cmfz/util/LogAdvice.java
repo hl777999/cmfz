@@ -1,56 +1,119 @@
 package com.baizhi.cmfz.util;
-
 import com.baizhi.cmfz.entity.Log;
 import com.baizhi.cmfz.entity.Manager;
 import com.baizhi.cmfz.service.LogService;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;;
 import java.lang.reflect.Method;
 import java.util.Date;
+/**
+ * 额外功能
+ */
 
 /**
- * 日志额外功能工具类
- * Created by Administrator on 2018/7/9.
+ * 要获得 session 可以使用 com.opensymphony.xwork2.ActionContext
+ * 也可以使用ThreadLocal
+ * 也可以使用下面的方法
  */
+
+
+//标记这是一个 额外功能类
 @Aspect
 public class LogAdvice {
-
-
-
-    @Autowired
-    private LogService logService;
-
+    /**
+     * 声明切入点表达式(只记录 增删改 的 操作日志)
+     */
+    @Pointcut("execution(* com.baizhi.cmfz.service.impl.*.add*(..)) || execution(* com.baizhi.cmfz.service.impl.*.remove*(..))||execution(* com.baizhi.cmfz.service.impl.*.modify*(..))")
+    public void pc(){}
     /**
      * 管理员登入方法的切入点
      */
     @Pointcut("execution(* com.baizhi.cmfz.service.impl.ManagerServiceImpl.queryByIdandPwd(..))")
     public void loginCell(){}
-
     /**
-     * 添加操作的切入点
+     * 环绕通知
      */
-    @Pointcut("execution(* com.baizhi.cmfz.service.impl.add*(..))")
-    public void insertCell(){}
+    @Around("pc()")
+    public Object around(ProceedingJoinPoint pjp)/*连接点*/throws Throwable{
+        //得到原始方法的参数
+        Object[] args = pjp.getArgs();
+        String  param = args[0].toString();
 
-    /**
-     * 修改操作的切入点
-     */
-    @Pointcut("execution(* com.baizhi.cmfz.service.impl.modify*(..))")
-    public void updateCell(){}
+        //得到方法的签名
+        MethodSignature methodSignature = (MethodSignature) pjp.getSignature();
+        Method method = methodSignature.getMethod();
+        String methodString = method.toString();
+        if(methodString.contains("Log")){
+            Object proceed = pjp.proceed();
+            return proceed;
+        }
 
-    /**
-     * 删除操作的切入点
-     */
-    @Pointcut("execution(* com.baizhi.cmfz.service.impl.remove*(..))")
-    public  void deleteCell(){}
+
+        String resource = "";
+        if(methodString.contains("Guru")){
+            resource="Guru";
+        }else if (methodString.contains("Article")){
+            resource="Article";
+        }else if(methodString.contains("Manager")) {
+            resource = "Manager";
+        }else if(methodString.contains("Menu")) {
+            resource = "Menu";
+        }else if(methodString.contains("Picture")) {
+            resource = "Picture";
+        }else if(methodString.contains("User")) {
+            resource = "User";
+        }else{
+            resource="";
+        }
+        String methodName = method.getName();
+        String name = "";
+        if(methodName.contains("modify")){
+            name="修改";
+        }else if (methodName.contains("add")){
+            name="添加";
+        }else if (methodName.contains("query")){
+            name="登录";
+        }else{
+            name="删除";
+        }
+        //调用传递，object:原始方法的返回值
+        Object proceed = pjp.proceed();
+        boolean object = (boolean) proceed;
+        String result ="";
+        if(object==true){
+            result="success";
+        }else{
+            result = "fail";
+        }
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        Manager manager = (Manager) session.getAttribute("manager");
+        //填充数据
+        Log log = new Log();
+        log.setTime(new Date());
+        log.setAction(name);
+        log.setMessage(param);
+//        log.setResult(result);
+        log.setResource(resource);
+        log.setUser(manager.getMgrname());
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        LogService logService = (LogService) ctx.getBean("logServiceImpl");
+        logService.insetLogs(log);
+        return proceed;
+    }
 
     @AfterReturning(value = "loginCell()", argNames = "joinPoint,object", returning = "object")
     public void loginLog(JoinPoint joinPoint, Object object){
-        String user;
         Manager manager= (Manager) object;
+        String user;
         if (manager==null){return;}
         //没有参数
         if (joinPoint.getArgs()==null){return;}
@@ -64,9 +127,10 @@ public class LogAdvice {
         log.setResource(classname);
         log.setAction("管理员登入");
         log.setMessage(content);
-        System.out.println("----------------------"+log+"----------------------------");
-        Integer integer = logService.insetLogs(log);
-        System.out.println("---------------------------------"+integer+"-----------------------------------------");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        LogService logService = (LogService) ctx.getBean("logServiceImpl");
+        logService.insetLogs(log);
+
     }
 
     public String optionContent(Object[] args, String mName) {
@@ -107,5 +171,4 @@ public class LogAdvice {
         }
         return rs.toString();
     }
-
 }

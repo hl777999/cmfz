@@ -23,6 +23,8 @@
             pagePosition: "bottom",
             pageList: [2, 4, 6, 8, 10],
             pageSize: 10,
+            striped:true,
+            resizable:true
         });
 
 
