@@ -1,7 +1,8 @@
 package com.baizhi.cmfz.entity;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.alibaba.fastjson.annotation.JSONField;
-import org.jeecgframework.poi.excel.annotation.Excel;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class Guru implements Serializable {
     private String gurusummary;
     @Excel(name = "上师状态")
     private String gurustatus;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createtime;
     public Guru() {
@@ -75,7 +77,7 @@ public class Guru implements Serializable {
         this.gurustatus = gurustatus;
     }
 
-    public Date getCreatetime(Date date) {
+    public Date getCreatetime() {
         return createtime;
     }
 

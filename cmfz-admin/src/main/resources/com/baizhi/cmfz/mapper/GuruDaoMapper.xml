@@ -15,7 +15,7 @@
           <where>
               <if test="id !=null">
                   guru_id=#{id}
-              </if>
+          </if>
               <if test="name !=null">
                   guru_name=#{name}
               </if>

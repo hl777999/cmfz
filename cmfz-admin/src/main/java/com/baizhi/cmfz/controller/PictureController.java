@@ -25,7 +25,7 @@ public class PictureController {
 
     @RequestMapping("/deletepic")
     public @ResponseBody boolean deletePic(String id){
-        return pictureService.deletePic(id);
+        return pictureService.removePic(id);
     }
 
     @RequestMapping("/modifypic")

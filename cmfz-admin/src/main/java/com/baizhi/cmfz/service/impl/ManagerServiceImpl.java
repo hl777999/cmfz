@@ -19,7 +19,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional(readOnly = true)
-    public Manager login(String id, String password) {
+    public Manager queryByIdandPwd(String id, String password) {
         Manager manager = managerDao.selectById(id);
         if (manager!=null && manager.getMgrpwd().equals(EncryptionUtils.encryptionCodec(password+manager.getMgrsalt()))){
             return manager;
@@ -29,7 +29,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional
-    public boolean regist(Manager manager) {
+    public boolean addManger(Manager manager) {
         String salt = EncryptionUtils.getRandomSalt(6);
         manager.setMgrsalt(salt);
         manager.setMgrpwd(EncryptionUtils.encryptionCodec(manager.getMgrpwd()+salt));

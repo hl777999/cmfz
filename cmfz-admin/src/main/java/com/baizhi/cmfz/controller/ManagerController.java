@@ -26,7 +26,7 @@ public class ManagerController {
      */
     @RequestMapping("/login")
     public String login(String id, String password, HttpServletRequest request){
-        Manager manager = managerService.login(id, password);
+        Manager manager = managerService.queryByIdandPwd(id, password);
         HttpSession session = request.getSession();
         if (manager!=null){
             session.setAttribute("manager",manager);

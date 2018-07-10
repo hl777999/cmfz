@@ -34,7 +34,7 @@ public class GuruServiceImpl implements GuruService {
 
     @Override
     @Transactional
-    public boolean insertGuru(Guru guru) {
+    public boolean addGuru(Guru guru) {
         guru.setCreatetime(new Date());
         Integer i = guruDao.insertGuru(guru);
         if (i==1){
@@ -66,7 +66,7 @@ public class GuruServiceImpl implements GuruService {
 
     @Override
     @Transactional
-    public boolean batchAddGuru(List<Guru> gurus) {
+    public boolean addBatchGuru(List<Guru> gurus) {
         Integer i = guruDao.insertBatchGuru(gurus);
         if (i>0){
             return true;

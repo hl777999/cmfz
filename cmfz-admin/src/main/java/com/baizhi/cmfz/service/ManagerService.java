@@ -14,14 +14,14 @@ public interface ManagerService {
      * @param  id ,password  管理员登入的账号和密码
      * @return  返回管理员的信息
      */
-    public Manager login(String id ,String password);
+    public Manager queryByIdandPwd(String id ,String password);
 
     /**
      * 管理员注册功能
      * @param manager 管理员注册所需的信息
      * @return 返回true表示注册成功，否则失败
      */
-    public boolean regist(Manager manager);
+    public boolean addManger(Manager manager);
 
     /**
      * 根据ID查找管理员功能

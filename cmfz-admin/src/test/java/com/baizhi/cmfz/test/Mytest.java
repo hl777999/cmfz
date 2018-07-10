@@ -1,9 +1,6 @@
 package com.baizhi.cmfz.test;
 
-import com.baizhi.cmfz.dao.GuruDao;
-import com.baizhi.cmfz.dao.ManagerDao;
-import com.baizhi.cmfz.dao.MenuDao;
-import com.baizhi.cmfz.dao.PictureDao;
+import com.baizhi.cmfz.dao.*;
 import com.baizhi.cmfz.entity.*;
 import com.baizhi.cmfz.service.*;
 import com.baizhi.cmfz.util.EncryptionUtils;
@@ -42,7 +39,7 @@ public class Mytest {
     public void test3(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerService managerService= (ManagerService) ctx.getBean("managerServiceImpl");
-        Manager manager = managerService.login("125", "123456");
+        Manager manager = managerService.queryByIdandPwd("125", "123456");
         System.out.println(manager);
     }
 
@@ -50,7 +47,7 @@ public class Mytest {
     public void test4(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerService managerService= (ManagerService) ctx.getBean("managerServiceImpl");
-        boolean b = managerService.regist(new Manager("李四", "admin3", "123456", null, "一般管理员"));
+        boolean b = managerService.addManger(new Manager("李四", "admin3", "123456", null, "一般管理员"));
         if (b){
             System.out.println("注册成功");
         }
@@ -110,8 +107,8 @@ public class Mytest {
     public void test10(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         PictureService pictureService= (PictureService) ctx.getBean("pictureServiceImpl");
-//        Map<String, Object> map = pictureService.queryAll(1, 3);
-//        for (Map.Entry<String,Object> o : map.entrySet()) {
+//        Address<String, Object> map = pictureService.queryAll(1, 3);
+//        for (Address.Entry<String,Object> o : map.entrySet()) {
 //            System.out.println(o);
 //        }
 
@@ -206,4 +203,35 @@ public class Mytest {
             System.out.println("插入成功");
         }
     }
+
+    @Test
+    public void  test18() {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        UserDao userDao = (UserDao) ctx.getBean("userDao");
+//        List<Address> list=new ArrayList<>();
+//        list.add(new Address("北京"));
+//        list.add(new Address("河南"));
+//        list.add(new Address("河北"));
+//        //List<Address> addresses = userDao.selectBy(list);
+//        List<Address> addresses = userDao.selectByWomen(list);
+//        for (Address address : addresses) {
+//            System.out.println(address);
+//        }
+
+        List<Address> addresses = userDao.selectToAddress();
+        for (Address address : addresses) {
+            System.out.println(address);
+        }
+
+    }
+        @Test
+        public void test19(){
+            ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+            LogDao logDao= (LogDao) ctx.getBean("logDao");
+//            List<Log> logs = logDao.selectAll();
+//            for (Log log : logs) {
+//                System.out.println(log);
+//            }
+        }
+
 }

@@ -2,26 +2,24 @@
 <style type="text/css">
     .toolbar {
         border: 1px solid #ccc;
+        width: 1000px;
     }
 
     .text {
         border: 1px solid #ccc;
-        height: 400px;
+        height: 250px;
+        width: 1000px;
     }
 </style>
 <script type="text/javascript">
     $(function () {
-        $("#btn1").linkbutton({
-            onClick: function () {
-                var txt = editor.txt.html();
-                $("#article").val(txt);
-            }
-        });
         $("#btn2").linkbutton({
             onClick: function () {
-                var v = $("#article").val();
-                if(v==null){
-                    $.messager.alert("警告","请先确认编辑!");
+                $("#article").val(editor.txt.html());
+                var article = $("#article").val();
+                var m ="";
+                if( article = m){
+                    $.messager.alert("警告","文章内容不能为空！");
                 }else {
                     $.messager.confirm("确认","您确认保存该文章吗？",function (r) {
                         if (r){
@@ -36,9 +34,7 @@
                                 },
                                 success:function (date) {
                                     if(date){
-                                        $.messager.progress({
-                                            text:'正在提交',
-                                        });	// 如果提交成功则隐藏进度条
+                                        $.messager.progress({text:'正在提交'});	// 如果提交成功则隐藏进度条
                                         $.messager.progress('close');
                                     }else{
                                         $.messager.alert("警告","修改失败!");
@@ -51,23 +47,21 @@
                 }
             }
         });
-
-        $("#btn3").linkbutton({
-            onClick: function () {
-
+        $('#cc1').combobox({
+            url:"${pageContext.request.contextPath}/article/guruall",
+            valueField:'guruid',
+            textField:'guruname'
+        });
+        $("#btn1").linkbutton({
+            onClick:function () {
+                editor.txt.clear();
+                $("#form_article").form('reset');
             }
         });
     });
 </script>
-<table>
-    <tr>
-        <td><a id="btn1" class="easyui-linkbutton">确认编辑</a></td>
-        <td><a id="btn2" class="easyui-linkbutton">提交文章</a></td>
-        <td><a id="btn3" class="easyui-linkbutton">提交文章</a></td>
-    </tr>
-</table>
 <form id="form_article" method="post">
-    <div style="margin-left: 20px;margin-top: 20px">
+    <div style="margin-left: 50px;margin-top: 20px">
         <table style="border-collapse:separate; border-spacing:0px 15px;">
             <tr>
                 <td>文章标题:</td>
@@ -77,20 +71,15 @@
             <tr>
                 <td>文章作者:</td>
                 <td>
-                    <select id="cc" class="easyui-combobox" name="guruid" style="width:200px;">
-                        <option value="1">上师仁波切01</option>
-                        <option value="1">上师仁波切02</option>
-                        <option value="1">上师仁波切03</option>
-                        <option value="1">上师仁波切05</option>
-                        <option value="1">上师仁波切014</option>
+                    <select id="cc1"  name="guruid"  value="请选择上师" style="width:200px;">
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>文章状态:</td>
                 <td>
-                    <input id="switchbutton" class="easyui-switchbutton" name="articlestatus" value="不提交"
-                           data-options="onText:'上架',offText:'不上架'">
+                    &nbsp;&nbsp;不上架:<input  type="radio" name="articlestatus" value="不上架" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    上&nbsp;&nbsp;架:<input  type="radio" name="articlestatus" value="上架"/>
                 </td>
             </tr>
             <tr>
@@ -102,11 +91,14 @@
         </table>
     </div>
 </form>
-<div id="div1" class="toolbar" style="margin-left: 20px;margin-top: 5px">
+<div id="div1" class="toolbar" style="margin-left: 50px;margin-top: 5px">
 </div>
-<div style="padding: 5px 0; color: #ccc;margin-left: 20px"></div>
-<div id="div2" class="text" style="margin-left: 20px;min-height: 300px"> <!--可使用 min-height 实现编辑区域自动增加高度-->
-    <p>请输入内容</p>
+<div style="padding: 5px 0; color: #ccc;margin-left: 50px"></div>
+<div id="div2" class="text" style="margin-left: 50px"> <!--可使用 min-height 实现编辑区域自动增加高度-->
+</div>
+<div  style="margin-left: 470px;margin-top: 20px;margin-bottom: 20px">
+    <a id="btn2" class="easyui-linkbutton">提交文章</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a id="btn1" class="easyui-linkbutton">重置文章</a>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/wangEditor.js"></script>
 <script type="text/javascript">

@@ -28,7 +28,7 @@ public interface GuruService {
      * @param guru
      * @return
      */
-    public boolean insertGuru(Guru guru);
+    public boolean addGuru(Guru guru);
 
     /**
      * 修改上师信息
@@ -49,7 +49,7 @@ public interface GuruService {
      * @param gurus
      * @return
      */
-    public  boolean batchAddGuru(List<Guru> gurus);
+    public  boolean addBatchGuru(List<Guru> gurus);
 
     /**
      * 查询所有上师信息

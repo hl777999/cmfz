@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.UserDao">
+   <select id="selectBy" parameterType="java.util.List" resultType="Address">
+              <foreach collection="list" item="item" index="index" separator="UNION">
+                  select user_address name,
+                  SUM(user_sex='男') value
+                  from user
+                  where user_address= #{item.name}
+              </foreach>
+   </select>
+
+    <select id="selectByWomen" parameterType="java.util.List" resultType="Address">
+        <foreach collection="list" item="item" index="index" separator="UNION">
+            select user_address name,
+            SUM(user_sex='女') value
+            from user
+            where user_address= #{item.name}
+        </foreach>
+    </select>
+
+    <select id="selectToAddress" resultType="Address">
+        select distinct user_address  name
+        from user
+    </select>
+</mapper>

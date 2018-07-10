@@ -240,7 +240,7 @@
     </div>
     <a id="upload" class="easyui-linkbutton"
        data-options="iconCls:'icon-arrow_up',plain:true,text:'批量添加上师'"></a>
-    <a id="download" class="easyui-linkbutton" data-options="iconCls:'icon-page_excel',plain:true,text:'导出上师信息'"
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-page_excel',plain:true,text:'导出上师信息'"
        href="${pageContext.request.contextPath}/uploadfiled/downloadguru"></a>
 </div>
 <div id="dd2"></div>

@@ -7,137 +7,137 @@ import java.io.Serializable;
  * Created by huanglei on 2018/7/3.
  */
 public class User implements Serializable {
-    private String user_id;
-    private String user_name;
-    private String user_buddhishname;
-    private String user_password;
-    private String user_sex;
-    private String user_headpic;
-    private String user_address;
-    private String user_phone;
-    private String user_signa;
-    private String user_status;
-    private String guru_id;
+    private String userid;
+    private String username;
+    private String userbuddhishname;
+    private String userpassword;
+    private String usersex;
+    private String userheadpic;
+    private String useraddress;
+    private String userphone;
+    private String usersigna;
+    private String userstatus;
+    private String guruid;
 
     public User() {
     }
 
-    public User(String user_id, String user_name, String user_buddhishname, String user_password, String user_sex, String user_headpic, String user_address, String user_phone, String user_signa, String user_status, String guru_id) {
-        this.user_id = user_id;
-        this.user_name = user_name;
-        this.user_buddhishname = user_buddhishname;
-        this.user_password = user_password;
-        this.user_sex = user_sex;
-        this.user_headpic = user_headpic;
-        this.user_address = user_address;
-        this.user_phone = user_phone;
-        this.user_signa = user_signa;
-        this.user_status = user_status;
-        this.guru_id = guru_id;
+    public User(String userid, String username, String userbuddhishname, String userpassword, String usersex, String userheadpic, String useraddress, String userphone, String usersigna, String userstatus, String guruid) {
+        this.userid = userid;
+        this.username = username;
+        this.userbuddhishname = userbuddhishname;
+        this.userpassword = userpassword;
+        this.usersex = usersex;
+        this.userheadpic = userheadpic;
+        this.useraddress = useraddress;
+        this.userphone = userphone;
+        this.usersigna = usersigna;
+        this.userstatus = userstatus;
+        this.guruid = guruid;
     }
 
-    public String getUser_id() {
-        return user_id;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public String getUser_name() {
-        return user_name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUser_name(String user_name) {
-        this.user_name = user_name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUser_buddhishname() {
-        return user_buddhishname;
+    public String getUserbuddhishname() {
+        return userbuddhishname;
     }
 
-    public void setUser_buddhishname(String user_buddhishname) {
-        this.user_buddhishname = user_buddhishname;
+    public void setUserbuddhishname(String userbuddhishname) {
+        this.userbuddhishname = userbuddhishname;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getUserpassword() {
+        return userpassword;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setUserpassword(String userpassword) {
+        this.userpassword = userpassword;
     }
 
-    public String getUser_sex() {
-        return user_sex;
+    public String getUsersex() {
+        return usersex;
     }
 
-    public void setUser_sex(String user_sex) {
-        this.user_sex = user_sex;
+    public void setUsersex(String usersex) {
+        this.usersex = usersex;
     }
 
-    public String getUser_headpic() {
-        return user_headpic;
+    public String getUserheadpic() {
+        return userheadpic;
     }
 
-    public void setUser_headpic(String user_headpic) {
-        this.user_headpic = user_headpic;
+    public void setUserheadpic(String userheadpic) {
+        this.userheadpic = userheadpic;
     }
 
-    public String getUser_address() {
-        return user_address;
+    public String getUseraddress() {
+        return useraddress;
     }
 
-    public void setUser_address(String user_address) {
-        this.user_address = user_address;
+    public void setUseraddress(String useraddress) {
+        this.useraddress = useraddress;
     }
 
-    public String getUser_phone() {
-        return user_phone;
+    public String getUserphone() {
+        return userphone;
     }
 
-    public void setUser_phone(String user_phone) {
-        this.user_phone = user_phone;
+    public void setUserphone(String userphone) {
+        this.userphone = userphone;
     }
 
-    public String getUser_signa() {
-        return user_signa;
+    public String getUsersigna() {
+        return usersigna;
     }
 
-    public void setUser_signa(String user_signa) {
-        this.user_signa = user_signa;
+    public void setUsersigna(String usersigna) {
+        this.usersigna = usersigna;
     }
 
-    public String getUser_status() {
-        return user_status;
+    public String getUserstatus() {
+        return userstatus;
     }
 
-    public void setUser_status(String user_status) {
-        this.user_status = user_status;
+    public void setUserstatus(String userstatus) {
+        this.userstatus = userstatus;
     }
 
-    public String getGuru_id() {
-        return guru_id;
+    public String getGuruid() {
+        return guruid;
     }
 
-    public void setGuru_id(String guru_id) {
-        this.guru_id = guru_id;
+    public void setGuruid(String guruid) {
+        this.guruid = guruid;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", user_name='" + user_name + '\'' +
-                ", user_buddhishname='" + user_buddhishname + '\'' +
-                ", user_password='" + user_password + '\'' +
-                ", user_sex='" + user_sex + '\'' +
-                ", user_headpic='" + user_headpic + '\'' +
-                ", user_address='" + user_address + '\'' +
-                ", user_phone='" + user_phone + '\'' +
-                ", user_signa='" + user_signa + '\'' +
-                ", user_status='" + user_status + '\'' +
-                ", guru_id='" + guru_id + '\'' +
+                "userid='" + userid + '\'' +
+                ", username='" + username + '\'' +
+                ", userbuddhishname='" + userbuddhishname + '\'' +
+                ", userpassword='" + userpassword + '\'' +
+                ", usersex='" + usersex + '\'' +
+                ", userheadpic='" + userheadpic + '\'' +
+                ", useraddress='" + useraddress + '\'' +
+                ", userphone='" + userphone + '\'' +
+                ", usersigna='" + usersigna + '\'' +
+                ", userstatus='" + userstatus + '\'' +
+                ", guruid='" + guruid + '\'' +
                 '}';
     }
 }

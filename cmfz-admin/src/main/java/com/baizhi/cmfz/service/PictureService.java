@@ -30,7 +30,7 @@ public interface PictureService {
      * @param pictureid
      * @return
      */
-    public boolean deletePic(String pictureid);
+    public boolean removePic(String pictureid);
 
     /**
      * 修改图片的轮播状态

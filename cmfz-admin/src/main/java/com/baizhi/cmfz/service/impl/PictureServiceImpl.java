@@ -44,7 +44,7 @@ public class PictureServiceImpl implements PictureService {
 
     @Override
     @Transactional
-    public boolean deletePic(String pictureid) {
+    public boolean removePic(String pictureid) {
         Integer i = pictureDao.deletePic(pictureid);
         if (i==1){
             return true;
