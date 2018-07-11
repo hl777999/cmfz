@@ -22,11 +22,13 @@ public class LogServiceImpl implements LogService {
     private LogDao logDao;
 
     @Override
+    @Transactional
     public Integer insetLogs(Log log) {
         return logDao.insertLog(log);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Map<String,Object> selectAllLog(Integer newPage,Integer pageSize) {
         List<Log> logs = logDao.selectAll((newPage-1)*pageSize,pageSize);
         Integer integer = logDao.selectLogCount();

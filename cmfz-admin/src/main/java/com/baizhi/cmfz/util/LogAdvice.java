@@ -6,6 +6,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,6 +29,9 @@ import java.util.Date;
 //标记这是一个 额外功能类
 @Aspect
 public class LogAdvice {
+
+    @Autowired
+    private LogService logService;
     /**
      * 声明切入点表达式(只记录 增删改 的 操作日志)
      */
@@ -42,7 +46,7 @@ public class LogAdvice {
      * 环绕通知
      */
     @Around("pc()")
-    public Object around(ProceedingJoinPoint pjp)/*连接点*/throws Throwable{
+    public Object around(ProceedingJoinPoint pjp) throws Throwable{
         //得到原始方法的参数
         Object[] args = pjp.getArgs();
         String  param = args[0].toString();
@@ -101,11 +105,9 @@ public class LogAdvice {
         log.setTime(new Date());
         log.setAction(name);
         log.setMessage(param);
-//        log.setResult(result);
+        log.setResult(result);
         log.setResource(resource);
         log.setUser(manager.getMgrname());
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        LogService logService = (LogService) ctx.getBean("logServiceImpl");
         logService.insetLogs(log);
         return proceed;
     }
@@ -119,18 +121,16 @@ public class LogAdvice {
         if (joinPoint.getArgs()==null){return;}
         user=manager.getMgrname();//获得管理员名字
         String methodname = joinPoint.getSignature().getName();//获取方法名
-        String classname = joinPoint.getSignature().getDeclaringType().getName();//操作类的类名
+//        String classname = joinPoint.getSignature().getDeclaringType().getName();//操作类的类名
         String content = optionContent(joinPoint.getArgs(), methodname);
         Log log=new Log();
         log.setUser(user);
         log.setTime(new Date());
-        log.setResource(classname);
+        log.setResource("Manager");
         log.setAction("管理员登入");
         log.setMessage(content);
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        LogService logService = (LogService) ctx.getBean("logServiceImpl");
+        log.setResult("success");
         logService.insetLogs(log);
-
     }
 
     public String optionContent(Object[] args, String mName) {
@@ -164,7 +164,7 @@ public class LogAdvice {
                     continue;
                 }
                 // 将值加入内容中
-                rs.append("(" + methodName + ":" + rsValue + ")");
+                rs.append("(" + methodName + ":" + rsValue.toString() + ")");
             }
             rs.append("]");
             index++;
