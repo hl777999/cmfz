@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.cmfz.dao.RoleDao">
+     <select id="selectByIdtoRole" resultType="Role">
+         select
+            role_id roleid,
+            role_name rolename,
+            role_tag roletag
+         from role where role_id in(select role_id from manager_role where mgr_id=(select mgr_id from manager where
+         mgr_id=#{id}))
+     </select>
+
+    <select id="selectByIdtoPermission" resultType="Permission">
+        select
+            resource_id resourceid,
+            resource_name resourcename,
+            resource_tag resourcetag,
+            resource_url resourceurl,
+            permission_tag permissiontag
+        from permission where resource_id in (select permission_id from role_permission where role_id in (select role_id from role where role_id in(select role_id from manager_role where mgr_id=(select mgr_id from manager where mgr_id=#{id}))))
+    </select>
+</mapper>

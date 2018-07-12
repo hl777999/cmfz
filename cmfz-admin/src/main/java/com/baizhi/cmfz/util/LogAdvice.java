@@ -40,7 +40,7 @@ public class LogAdvice {
     /**
      * 管理员登入方法的切入点
      */
-    @Pointcut("execution(* com.baizhi.cmfz.service.impl.ManagerServiceImpl.queryByIdandPwd(..))")
+    @Pointcut("execution(* com.baizhi.cmfz.service.impl.ManagerServiceImpl.queryById(..))")
     public void loginCell(){}
     /**
      * 环绕通知

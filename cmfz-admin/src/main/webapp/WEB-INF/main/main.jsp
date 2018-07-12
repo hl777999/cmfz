@@ -19,12 +19,13 @@
 		    for (var i=0;i<data.length;i++){
 		        var content="";
 		        $.each(data[i].menus,function (index,obj) {
-					content+="<p style='text-align: center'><a class=\"easyui-linkbutton\"  data-options=\"plain:true,iconCls:'icon-search'\" onclick=\"addTab('"+obj.menuname+"','"+obj.menuurl+"')\">"+obj.menuname+"</a></p>";
+					content+="<p style='text-align: center'><a class=\"easyui-linkbutton\"  data-options=\"plain:true,iconCls:'"+obj.menuicon+"'\" onclick=\"addTab('"+obj.menuname+"','"+obj.menuurl+"')\">"+obj.menuname+"</a></p>";
                 });
 				$("#aa").accordion("add",{
                     title: data[i].menuname,
                     content: content,
-                    selected: false
+                    selected: false,
+                    iconCls:data[i].menuicon
                 });
 			}
         });

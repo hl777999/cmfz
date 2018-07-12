@@ -23,7 +23,7 @@ public class Mytest {
     public void test1(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerDao managerDao= (ManagerDao) ctx.getBean("managerDao");
-        Manager manager = managerDao.selectById("123");
+        Manager manager = managerDao.selectById(123);
         System.out.println(manager);
     }
     @Test
@@ -31,7 +31,7 @@ public class Mytest {
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerDao managerDao= (ManagerDao) ctx.getBean("managerDao");
         String salt = EncryptionUtils.getRandomSalt(6);
-        Manager manager=new Manager("125","admin3",EncryptionUtils.encryptionCodec("123456"+salt),salt,"超级管理员");
+        Manager manager=new Manager(125,"admin3",EncryptionUtils.encryptionCodec("123456"+salt),salt,"超级管理员");
         Integer i = managerDao.insertManager(manager);
         System.out.println("---------------"+i);
     }
@@ -39,7 +39,9 @@ public class Mytest {
     public void test3(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerService managerService= (ManagerService) ctx.getBean("managerServiceImpl");
-        Manager manager = managerService.queryByIdandPwd("125", "123456");
+//        Manager manager = managerService.queryByIdandPwd(125, "123456");
+//        System.out.println(manager);
+        Manager manager = managerService.queryById(123);
         System.out.println(manager);
     }
 
@@ -47,7 +49,7 @@ public class Mytest {
     public void test4(){
         ApplicationContext ctx=new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
         ManagerService managerService= (ManagerService) ctx.getBean("managerServiceImpl");
-        boolean b = managerService.addManger(new Manager("李四", "admin3", "123456", null, "一般管理员"));
+        boolean b = managerService.addManger(new Manager(126, "admin3", "123456", null, "一般管理员"));
         if (b){
             System.out.println("注册成功");
         }
@@ -234,4 +236,18 @@ public class Mytest {
 //            }
         }
 
+    @Test
+    public void test20(){
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        RoleDao roleDao= (RoleDao) ctx.getBean("roleDao");
+//        List<Role> roles = roleDao.selectByIdtoRole(123);
+//        for (Role role : roles) {
+//            System.out.println(role);
+//        }
+
+        List<Permission> permissions = roleDao.selectByIdtoPermission(123);
+        for (Permission permission : permissions) {
+            System.out.println(permission);
+        }
+    }
 }

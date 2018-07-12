@@ -3,6 +3,12 @@ package com.baizhi.cmfz.controller;
 import com.baizhi.cmfz.entity.Manager;
 import com.baizhi.cmfz.service.ManagerService;
 import com.baizhi.cmfz.util.CreateValidateCode;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,15 +30,37 @@ public class ManagerController {
     /**
      *管理员登录功能
      */
+//    @RequestMapping("/login")
+//    public String login(Integer id, String password, HttpServletRequest request){
+//        Manager manager = managerService.queryByIdandPwd(id, password);
+//        HttpSession session = request.getSession();
+//        if (manager!=null){
+//            session.setAttribute("manager",manager);
+//            return "WEB-INF/main/main";
+//        }
+//        return "redirect:/login.jsp";
+//    }
     @RequestMapping("/login")
-    public String login(String id, String password, HttpServletRequest request){
-        Manager manager = managerService.queryByIdandPwd(id, password);
-        HttpSession session = request.getSession();
-        if (manager!=null){
+    public String login(Integer id,String password,HttpServletRequest request){
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(new UsernamePasswordToken(id.toString(),password));
+            System.out.println(subject.hasRole("root") ? "有root角色":"无root角色");
+            Manager manager = managerService.queryById(id);
+            HttpSession session = request.getSession();
             session.setAttribute("manager",manager);
             return "WEB-INF/main/main";
+        } catch (UnknownAccountException e) {
+            e.printStackTrace();
+            return "redirect:/login.jsp";
+        }catch (IncorrectCredentialsException e){
+            e.printStackTrace();
+            return "redirect:/login.jsp";
+        }catch (AuthenticationException e){
+            e.printStackTrace();
+            return "redirect:/login.jsp";
         }
-        return "redirect:/login.jsp";
+
     }
 
     /**
@@ -41,7 +69,7 @@ public class ManagerController {
      * @return
      */
     @RequestMapping("/validatemgrid")
-    public @ResponseBody boolean validatemgrid(String id){
+    public @ResponseBody boolean validatemgrid(Integer id){
         Manager manager = managerService.queryById(id);
         if (manager!=null){
             return true;
@@ -76,8 +104,12 @@ public class ManagerController {
 
     @RequestMapping("/logout")
     public  String logout(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        session.invalidate();
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.logout();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "redirect:/login.jsp";
     }
 }

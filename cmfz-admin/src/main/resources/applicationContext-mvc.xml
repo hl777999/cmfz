@@ -37,4 +37,14 @@
           <property name="prefix" value="/"/>
           <property name="suffix" value=".jsp"/>
       </bean>
+
+    <!--切换动态代理方式cglib-->
+    <!--<aop:config proxy-target-class="true"></aop:config>-->
+
+    <!--&lt;!&ndash;-->
+        <!--springmvc 工厂是否可以使用spring工厂创建的bean-->
+    <!--&ndash;&gt;-->
+    <bean id="authorizationAttributeSourceAdvisor" class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"></property>
+    </bean>
 </beans>

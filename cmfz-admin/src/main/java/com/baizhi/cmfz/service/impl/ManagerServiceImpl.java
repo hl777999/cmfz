@@ -19,7 +19,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     //@Transactional(readOnly = true)截取登入日志的时候不能加只读锁
-    public Manager queryByIdandPwd(String id, String password) {
+    public Manager queryByIdandPwd(Integer id, String password) {
         Manager manager = managerDao.selectById(id);
         if (manager!=null && manager.getMgrpwd().equals(EncryptionUtils.encryptionCodec(password+manager.getMgrsalt()))){
             return manager;
@@ -41,8 +41,8 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Manager queryById(String id) {
+    @Transactional
+    public Manager queryById(Integer id) {
         Manager manager = managerDao.selectById(id);
         return manager;
     }

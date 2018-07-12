@@ -14,7 +14,7 @@ public interface ManagerService {
      * @param  id ,password  管理员登入的账号和密码
      * @return  返回管理员的信息
      */
-    public Manager queryByIdandPwd(String id ,String password);
+    public Manager queryByIdandPwd(Integer id ,String password);
 
     /**
      * 管理员注册功能
@@ -28,5 +28,5 @@ public interface ManagerService {
      * @param id 需要查找的管理员ID
      * @return 返回管理员信息，若为NULL则表示没有该管理员信息
      */
-    public Manager queryById(String id);
+    public Manager queryById(Integer id);
 }

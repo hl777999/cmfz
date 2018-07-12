@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -85,6 +86,7 @@
                     }]
                 });
             }});
+        <shiro:hasRole name="root">
         $("#edit1").linkbutton({
             onClick :function() {
                 // 获取当前datagrid选中的这行记录 json
@@ -142,7 +144,8 @@
                 }
             }
         });
-
+        </shiro:hasRole>
+        <shiro:hasRole name="root">
         $("#cancel1").linkbutton({
             onClick :function() {
                 // 获取当前datagrid选中的这行记录 json
@@ -169,6 +172,7 @@
                 }
             }
         });
+        </shiro:hasRole>
         $("#upload").linkbutton({
             onClick :function() {
                 $("#dd4").dialog({
@@ -223,13 +227,15 @@
 </script>
 <table id="tt2"></table>
 <div id="tb1" style="display: none">
+    <shiro:hasRole name="root">
     <a id="edit1" class="easyui-linkbutton"
-       data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a>
+       data-options="iconCls:'icon-edit',plain:true,text:'修改'"></a></shiro:hasRole>
     <a id="add1" class="easyui-linkbutton"
        data-options="iconCls:'icon-add',plain:true,text:'新增'"></a>
+    <shiro:hasRole name="root">
     <a id="cancel1" class="easyui-linkbutton"
        data-options="iconCls:'icon-cancel',plain:true,text:'删除'">
-    </a>
+    </a></a></shiro:hasRole>
     <input id="ss" class="easyui-searchbox" style="width:300px"
            data-options="searcher:qq,prompt:'请您输入你的查找选项',menu:'#mm'"></input>
     <div id="mm" style="width:150px">
@@ -240,8 +246,9 @@
     </div>
     <a id="upload" class="easyui-linkbutton"
        data-options="iconCls:'icon-arrow_up',plain:true,text:'批量添加上师'"></a>
+     <shiro:hasRole name="root">
     <a class="easyui-linkbutton" data-options="iconCls:'icon-page_excel',plain:true,text:'导出上师信息'"
-       href="${pageContext.request.contextPath}/uploadfiled/downloadguru"></a>
+       href="${pageContext.request.contextPath}/uploadfiled/downloadguru"></a></shiro:hasRole>
 </div>
 <div id="dd2"></div>
 <div id="dd3"></div>

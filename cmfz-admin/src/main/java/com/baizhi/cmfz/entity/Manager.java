@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Component
 public class Manager  implements Serializable{
-    private String mgrid;
+    private Integer mgrid;
     private String mgrname;
     private String mgrpwd;
     private String mgrsalt;
@@ -19,7 +19,7 @@ public class Manager  implements Serializable{
     public Manager() {
     }
 
-    public Manager(String mgrid, String mgrname, String mgrpwd, String mgrsalt, String mgrstatus) {
+    public Manager(Integer mgrid, String mgrname, String mgrpwd, String mgrsalt, String mgrstatus) {
         this.mgrid = mgrid;
         this.mgrname = mgrname;
         this.mgrpwd = mgrpwd;
@@ -27,11 +27,11 @@ public class Manager  implements Serializable{
         this.mgrstatus = mgrstatus;
     }
 
-    public String getMgrid() {
+    public Integer getMgrid() {
         return mgrid;
     }
 
-    public void setMgrid(String mgrid) {
+    public void setMgrid(Integer mgrid) {
         this.mgrid = mgrid;
     }
 

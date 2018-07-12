@@ -15,7 +15,7 @@ public interface ManagerDao {
      * @Param       用于查询的ID
      * @Exception   无
      */
-    public Manager selectById(@Param("id") String id);
+    public Manager selectById(@Param("id") Integer id);
     /**
      * @Description 添加一个管理员信息
      * @Author      黄磊
